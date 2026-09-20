@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+   <style>
+
+    /* Whole page */
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #e8dcc8, #c9b6d9, #8064a2);
+        text-align: center;
+        padding-top: 50px;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    /* Main To-Do box */
+    .todo {
+        background-color: #fffdf9;
+        width: 400px;
+        margin: auto;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(65, 45, 80, 0.25);
+    }
+
+    /* Heading */
+    h2 {
+        color: #4a3658;
+        font-size: 32px;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    /* Input */
+    input {
+        padding: 13px;
+        width: 230px;
+        border: 2px solid #d4c6d9;
+        border-radius: 9px;
+        outline: none;
+        font-size: 15px;
+        background-color: #fffdf9;
+        box-sizing: border-box;
+    }
+
+    /* Input when clicked */
+    input:focus {
+        border-color: #8064a2;
+        box-shadow: 0 0 8px rgba(128, 100, 162, 0.25);
+    }
+
+    /* All buttons */
+    button {
+        padding: 11px 16px;
+        margin-left: 5px;
+        border: none;
+        border-radius: 9px;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    /* Add button */
+    .add {
+        background-color: #8064a2;
+    }
+
+    .add:hover {
+        background-color: #6e538d;
+        transform: translateY(-2px);
+    }
+
+    /* Task list */
+    ul {
+        padding: 0;
+        margin-top: 28px;
+    }
+
+    /* Each task */
+  li {
+    list-style: none;
+    background-color: #f1e9f3;
+    color: #4a3658;
+    margin: 12px 0;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(65, 45, 80, 0.10);
+
+    display: flex;
+    align-items: center;
+}
+    /* Edit button */
+    .edit {
+    background-color: #9a7bb5;
+    margin-left: auto;
+}
+
+.delete {
+    background-color: #5c476d;
+    margin-left: 5px;
+}
+
+</style>
+</head>
+
+<body>
+    <div class="todo">
+        <h2>To-Do List</h2>
+        <input type="text" id="task" placeholder="Enter your task">
+        <button class="add" onclick="addtask()">Add</button>
+        <ul id="list"></ul>
+    </div>
+    <script>
+        function addtask() {
+            let task = document.getElementById("task").value;
+            if (task == "") {
+                alert("Please enter a task");
+                return;
+            }
+            let li = document.createElement("li");
+            li.innerHTML = task;
+            let editButton = document.createElement("button");
+            editButton.innerHTML = "Edit";
+            editButton.className = "edit";
+            editButton.onclick = function() {
+                let newTask = prompt("Edit your task", task);
+                if (newTask != "") {
+                    li.firstChild.textContent = newTask;
+                    task = newTask;
+
+                }
+            };
+            let deleteButton = document.createElement("button");
+            deleteButton.innerHTML = "Delete";
+            deleteButton.className = "delete";
+            deleteButton.onclick = function () {
+                li.remove();
+
+            };
+            li.appendChild(editButton);
+            li.appendChild(deleteButton);
+            document.getElementById("list").appendChild(li);
+            document.getElementById("task").value = "";
+        }
+    </script>
+</body>
+
+</body>
+
+</html>
